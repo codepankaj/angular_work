@@ -1,0 +1,87 @@
+<h2>Please enter your details!</h2>
+<br>
+<form [formGroup]="myform" class="form-horizontal" (ngSubmit)="onFormSubmit()" novalidate >
+     <div class="form-group">
+        <label for="inputType" class="col-sm-2 control-label">Name:-</label>
+        <div class="col-sm-4">
+            <input formControlName="Name" class="form-control"    placeholder="Your Name" >          
+           <div *ngIf="myform.controls['Name'].hasError('required')" class="alert alert-danger">Please Enter Name</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputType" class="col-sm-2 control-label">LastName:-</label>
+        <div class="col-sm-4">
+            <input formControlName="LastName" class="form-control"  placeholder="LastName">
+            <div *ngIf="myform.controls['LastName'].hasError('required')" class="alert alert-danger">enter your lastname</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputType" class="col-sm-2 control-label">Email:-</label>
+        <div class="col-sm-4">
+            <input formControlName="Email" type="text"  class="form-control" placeholder="Your Email" > 
+            <div *ngIf="myform.controls['Email'].hasError('pattern')" class="alert alert-danger">Invaid Id</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputType" class="col-sm-2 control-label">DOB:-</label>
+        <div class="col-sm-4">
+                 <input type="Date" formControlName="Date" class="form-control" placeholder="Datepicker" />        
+        </div>
+    </div>
+    <div formGroupName ="address">
+   
+        <div class="form-group">
+        <label for="inputType" class="col-sm-2 control-label">Building Name:-</label>
+        <div class="col-sm-4">
+            <input formControlName="BuildingName"  class="form-control"  placeholder="BuildingName"> 
+            
+        </div>
+    </div>
+    <div class="form-group">
+            <label for="inputType" class="col-sm-2 control-label">Street Address:-</label>
+            <div class="col-sm-4">
+                <input formControlName="StreetAddress" class="form-control"  placeholder="StreetAddress">
+
+            </div>
+        </div>
+        <div class="form-group">
+                <label for="inputType" class="col-sm-2 control-label">Country:-</label>
+                <div class="col-sm-4">
+                        <input formControlName="Country"
+                        [typeahead]="country"
+                        [typeaheadOptionsLimit]="7"
+                        [typeaheadMinLength]="0"
+                        placeholder="your country"
+                        class="form-control">
+                </div>
+            </div>
+        <div class="form-group">
+                <label for="inputType" class="col-sm-2 control-label">State:-</label>
+                <div class="col-sm-4">
+                        <input formControlName="State"
+                        [typeahead]="states"
+                        [typeaheadOptionsLimit]="7"
+                        [typeaheadMinLength]="0"
+                        placeholder="your state"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                    <label for="inputType" class="col-sm-2 control-label">City:-</label>
+                    <div class="col-sm-4">
+                            <input formControlName="City"
+                            [typeahead]="city"
+                            [typeaheadOptionsLimit]="7"
+                            [typeaheadMinLength]="0"
+                            placeholder="your city"
+                            class="form-control">
+                    </div>
+                </div>
+            
+        
+       </div>
+        
+       <!-- <app-reactiveform></app-reactiveform> -->
+      <button type="Submit"  class="btn btn-default">Submit</button>
+     
+</form>
