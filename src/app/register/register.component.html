@@ -1,58 +1,62 @@
 <h2>Please enter your details!</h2>
 <br>
-<form [formGroup]="myform" class="form-horizontal" (ngSubmit)="onFormSubmit()" novalidate >
+<form [formGroup]="myform" class="form-horizontal" (ngSubmit)="onFormSubmit(myform.value)" novalidate>
      <div class="form-group">
         <label for="inputType" class="col-sm-2 control-label">Name:-</label>
         <div class="col-sm-4">
             <input formControlName="Name" class="form-control"    placeholder="Your Name" >          
-           <div *ngIf="myform.controls['Name'].hasError('required')" class="alert alert-danger">Please Enter Name</div>
-        </div>
+           <div *ngIf="myform.get('Name').hasError('required') && myform.get('Name').touched"
+               class="alert alert-danger">Name is requried
+            </div>
     </div>
+</div>
     <div class="form-group">
         <label for="inputType" class="col-sm-2 control-label">LastName:-</label>
         <div class="col-sm-4">
             <input formControlName="LastName" class="form-control"  placeholder="LastName">
-            <div *ngIf="myform.controls['LastName'].hasError('required')" class="alert alert-danger">enter your lastname</div>
+            <div *ngIf="myform.get('LastName').hasError('required') && myform.get('LastName').touched"  class="alert alert-danger">Last Name is requried</div>
         </div>
     </div>
     <div class="form-group">
         <label for="inputType" class="col-sm-2 control-label">Email:-</label>
         <div class="col-sm-4">
             <input formControlName="Email" type="text"  class="form-control" placeholder="Your Email" > 
-            <div *ngIf="myform.controls['Email'].hasError('pattern')" class="alert alert-danger">Invaid Id</div>
+         <div *ngIf="myform.get('Email').hasError('required') && myform.get('Email').touched" class="alert alert-danger"> Email is  required</div>      
         </div>
     </div>
     <div class="form-group">
         <label for="inputType" class="col-sm-2 control-label">DOB:-</label>
         <div class="col-sm-4">
-                 <input type="Date" formControlName="Date" class="form-control" placeholder="Datepicker" />        
+                 <input type="Date" formControlName="Date" class="form-control" placeholder="Datepicker"/>                
         </div>
     </div>
-    <div formGroupName ="address">
-   
-        <div class="form-group">
+        
+    <div class="form-group">
         <label for="inputType" class="col-sm-2 control-label">Building Name:-</label>
         <div class="col-sm-4">
             <input formControlName="BuildingName"  class="form-control"  placeholder="BuildingName"> 
-            
+            <div *ngIf="myform.get('BuildingName').hasError('required') && myform.get('BuildingName').touched "  class="alert alert-danger">BuildingName is requried</div>      
         </div>
     </div>
     <div class="form-group">
             <label for="inputType" class="col-sm-2 control-label">Street Address:-</label>
             <div class="col-sm-4">
                 <input formControlName="StreetAddress" class="form-control"  placeholder="StreetAddress">
-
+                <div *ngIf="myform.get('StreetAddress').hasError('required') && myform.get('StreetAddress').touched"  class="alert alert-danger">StreetAddress is requried</div>
+               
             </div>
         </div>
         <div class="form-group">
                 <label for="inputType" class="col-sm-2 control-label">Country:-</label>
                 <div class="col-sm-4">
-                        <input formControlName="Country"
-                        [typeahead]="country"
-                        [typeaheadOptionsLimit]="7"
-                        [typeaheadMinLength]="0"
-                        placeholder="your country"
-                        class="form-control">
+            <input formControlName="Country" 
+                     [typeahead]="country"
+                     [typeaheadOptionsLimit]="7"
+                     [typeaheadMinLength]="0" 
+                      placeholder="your country" 
+                      class="form-control"  >
+            <div *ngIf="myform.get('Country').hasError('required') && myform.get('Country').touched "  class="alert alert-danger">Country is requried</div>
+                       
                 </div>
             </div>
         <div class="form-group">
@@ -64,6 +68,7 @@
                         [typeaheadMinLength]="0"
                         placeholder="your state"
                         class="form-control">
+                        <div *ngIf="myform.get('State').hasError('required') && myform.get('State').touched"  class="alert alert-danger">State is requried</div>
                 </div>
             </div>
             <div class="form-group">
@@ -75,13 +80,22 @@
                             [typeaheadMinLength]="0"
                             placeholder="your city"
                             class="form-control">
+                            <div *ngIf="myform.get('City').hasError('required') && myform.get('City').touched "  class="alert alert-danger">City is requried</div>
                     </div>
                 </div>
-            
-        
-       </div>
-        
-       <!-- <app-reactiveform></app-reactiveform> -->
-      <button type="Submit"  class="btn btn-default">Submit</button>
-     
+
+            <ul class="list-group">
+                <li *ngFor="let user of userList" class="list-group-item">Name:-{{user.Name}}</li>
+                <li *ngFor="let user of userList" class="list-group-item">LastName:-{{user.LastName}}</li>
+                <li *ngFor="let user of userList" class="list-group-item">Email:-{{user.Email}}</li>
+                <li *ngFor="let user of userList" class="list-group-item">Date:-{{user.Date}}</li>
+                <li *ngFor="let user of userList" class="list-group-item"> BuildingName:-{{user.BuildingName}}</li>
+                <li *ngFor="let user of userList" class="list-group-item">StreetAddress:-{{user.StreetAddress}}</li>
+                <li *ngFor="let user of userList" class="list-group-item">Country:-{{user.Country}}</li>
+                <li *ngFor="let user of userList" class="list-group-item">State:-{{user.State}}</li>
+                <li *ngFor="let user of userList" class="list-group-item">City:-{{user.City}}</li> 
+                   
+            </ul>
+       
+      <button type="Submit"  class="btn btn-success" [disabled]="myform.invalid">Submit</button>   
 </form>

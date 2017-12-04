@@ -6,6 +6,7 @@ import { FormatWidth } from '@angular/common/src/i18n/locale_data_api';
 import {States} from '../statedata';
 import {Country} from '../countrydata';
 import {City} from '../citydata';
+import {User} from '../user';
 
 import 'rxjs/add/observable/of';
 
@@ -16,32 +17,32 @@ import 'rxjs/add/observable/of';
 })
 
 export class RegisterComponent implements OnInit {
+  userList: User[]=[];
   myform:FormGroup;
   states=States;
   country=Country;
   city=City;
   constructor()
   {this.myform = new FormGroup({
-                                  Name: new FormControl('',Validators.required),
+                                  Name: new FormControl('',[Validators.required,Validators.minLength(3)]),
                                   LastName:new FormControl('',Validators.required),
-                                  Email: new FormControl('',[Validators.required,Validators.pattern("[^@]*@[^@]*")]),
+                                  Email: new FormControl('',[Validators.required,Validators.email]),
                                   Date:new FormControl(),
                               
-                                  address: new FormGroup({
+                                 
                                   BuildingName: new FormControl('',Validators.required),
                                   StreetAddress: new FormControl('',Validators.required),
                                   Country: new FormControl('',Validators.required),
                                   State: new FormControl('',Validators.required),
                                   City: new FormControl('',Validators.required)
-                                  }),
-                               })   
-                              }
-                                  
+                                  })}
+                             
 ngOnInit()
     {
-      
        }
-       onFormSubmit(){console.log(this.myform)
+       onFormSubmit(myform)
+       {/* console.log(this.myform.value) */
+         this.userList.push(this.myform.value)
 
              }
 }
